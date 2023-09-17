@@ -1,0 +1,16 @@
+strategy("Simple Moving Average Crossover")
+
+// Define the moving averages
+ma_fast = sma(close, 10)
+ma_slow = sma(close, 50)
+
+// Generate the buy and sell signals
+buy = crossover(ma_fast, ma_slow)
+sell = crossunder(ma_fast, ma_slow)
+
+// Place the trades
+strategy.entry(id="Buy", long=true, when=buy)
+strategy.entry(id="Sell", long=false, when=sell)
+
+// Plot the results
+plot(strategy.equity, color=blue, linewidth=2, title="Equity")

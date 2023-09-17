@@ -1,0 +1,22 @@
+strategy("RSI Trading Strategy")
+
+// Define the RSI period
+rsi_period = 14
+
+// Calculate the RSI
+rsi = rsi(close, rsi_period)
+
+// Define the overbought and oversold levels
+overbought_level = 70
+oversold_level = 25
+
+// Generate the buy and sell signals
+buy = crossover(rsi, oversold_level)
+sell = crossunder(rsi, overbought_level)
+
+// Place the trades
+strategy.entry(id="Buy", long=true, when=buy)
+strategy.entry(id="Sell", long=false, when=sell)
+
+// Plot the results
+plot(strategy.equity, color=blue, linewidth=2, title="Equity")
